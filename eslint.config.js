@@ -25,4 +25,20 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.vitest,
+      },
+    },
+    // If you install eslint-plugin-vitest, you can add its rules here
+    // plugins: {
+    //   vitest: vitestPlugin,
+    // },
+    // rules: {
+    //   ...vitestPlugin.configs.recommended.rules,
+    // },
+  }
 )
