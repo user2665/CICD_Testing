@@ -7,10 +7,6 @@ interface TimeZoneOption {
   value: string;
 }
 
-interface DateValidationResult {
-  isValid: boolean;
-}
-
 const timeZones: TimeZoneOption[] = [
   { label: 'UTC', value: 'UTC' },
   { label: 'New York (EST)', value: 'America/New_York' },
@@ -19,9 +15,9 @@ const timeZones: TimeZoneOption[] = [
   { label: 'Sydney (AEST)', value: 'Australia/Sydney' }
 ];
 
-const validateDate = (dateStr: string): DateValidationResult => {
+export const validateDate = (dateStr: string): string | null => {
   if (!dateStr) {
-    return { isValid: false };
+    return "Date field cannot be empty.";
   }
 
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -29,12 +25,12 @@ const validateDate = (dateStr: string): DateValidationResult => {
 
   // Check year range (1000 to current year)
   if (year < 1000 || year > currentYear) {
-    return { isValid: false };
+    return `Year must be between 1000 and ${currentYear}.`;
   }
 
   // Check month range
   if (month < 1 || month > 12) {
-    return { isValid: false };
+    return "Invalid month.";
   }
 
   // Calculate days in month (accounting for leap years)
@@ -56,10 +52,10 @@ const validateDate = (dateStr: string): DateValidationResult => {
 
   // Check day range
   if (day < 1 || day > daysInMonth[month - 1]) {
-    return { isValid: false };
+    return "Invalid day for the selected month.";
   }
 
-  return { isValid: true };
+  return null;
 };
 
 const DateTimeChecker: React.FC = () => {
@@ -80,27 +76,27 @@ const DateTimeChecker: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const showError = () => {
-    setPopupMessage('date is not valid');
+  const showError = (message: string) => {
+    setPopupMessage(message);
     setShowPopup(true);
     setTimeout(() => setShowPopup(false), 3000);
   };
 
   const checkDateTime = () => {
     if (!date || !time) {
-      showError();
+      showError("Date and time fields cannot be empty.");
       return;
     }
 
-    const dateValidation = validateDate(date);
-    if (!dateValidation.isValid) {
-      showError();
+    const errorMessage = validateDate(date);
+    if (errorMessage) {
+      showError(errorMessage);
       return;
     }
 
     const inputDateTime = new Date(`${date}T${time}`);
     if (isNaN(inputDateTime.getTime())) {
-      showError();
+      showError("Invalid time value.");
       return;
     }
 
@@ -116,13 +112,13 @@ const DateTimeChecker: React.FC = () => {
 
   const convertTimeZone = () => {
     if (!date || !time) {
-      showError();
+      showError("Date and time fields cannot be empty.");
       return;
     }
 
-    const dateValidation = validateDate(date);
-    if (!dateValidation.isValid) {
-      showError();
+    const errorMessage = validateDate(date);
+    if (errorMessage) {
+      showError(errorMessage);
       return;
     }
 
@@ -135,19 +131,19 @@ const DateTimeChecker: React.FC = () => {
       });
       setResult(`Time in ${selectedTimeZone}: ${formattedDate}`);
     } catch {
-      showError();
+      showError("Error converting timezone.");
     }
   };
 
   const formatDate = () => {
     if (!date) {
-      showError();
+      showError("Date field cannot be empty.");
       return;
     }
 
-    const dateValidation = validateDate(date);
-    if (!dateValidation.isValid) {
-      showError();
+    const errorMessage = validateDate(date);
+    if (errorMessage) {
+      showError(errorMessage);
       return;
     }
 
@@ -163,7 +159,7 @@ const DateTimeChecker: React.FC = () => {
 
       setResult('Formatted dates:\n' + formats.join('\n'));
     } catch {
-      showError();
+      showError("Error formatting date.");
     }
   };
 
