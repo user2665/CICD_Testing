@@ -9,7 +9,7 @@ interface TimeZoneOption {
 
 const timeZones: TimeZoneOption[] = [
   { label: 'UTC', value: 'UTC' },
-  { label: 'New York (EST)', value: 'America/New_York' },
+  // { label: 'New York (EST)', value: 'America/New_York' },
   { label: 'London (GMT)', value: 'Europe/London' },
   { label: 'Tokyo (JST)', value: 'Asia/Tokyo' },
   { label: 'Sydney (AEST)', value: 'Australia/Sydney' }
