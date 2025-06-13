@@ -9,7 +9,7 @@ interface TimeZoneOption {
 
 const timeZones: TimeZoneOption[] = [
   { label: 'UTC', value: 'UTC' },
-  // { label: 'New York (EST)', value: 'America/New_York' },
+  { label: 'New York (EST)', value: 'America/New_York'} ,
   { label: 'London (GMT)', value: 'Europe/London' },
   { label: 'Tokyo (JST)', value: 'Asia/Tokyo' },
   { label: 'Sydney (AEST)', value: 'Australia/Sydney' }
@@ -20,7 +20,7 @@ export const validateDate = (dateStr: string): string | null => {
     return "Date field cannot be empty.";
   }
 
-  const [year, month, day] = dateStr.split('-').map(Number);
+  const [year, month, day = dateStr.split('-').map(Number);
   const currentYear = new Date().getFullYear();
 
   // Check year range (1000 to current year)
