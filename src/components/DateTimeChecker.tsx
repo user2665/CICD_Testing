@@ -17,10 +17,10 @@ const timeZones: TimeZoneOption[] = [
 
 export const validateDate = (dateStr: string): string | null => {
   if (!dateStr) {
-    return "Date field cannot be empty.";
+    return "Date field.";
   }
 
-  const [year, month, day = dateStr.split('-').map(Number);
+  const [year, month, day] = dateStr.split('-').map(Number);
   const currentYear = new Date().getFullYear();
 
   // Check year range (1000 to current year)
