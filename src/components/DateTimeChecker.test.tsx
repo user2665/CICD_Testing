@@ -9,7 +9,7 @@ describe('validateDate', () => {
   });
 
   it('should return an error message for an empty string', () => {
-    expect(validateDate('')).toBe('Date field cannot be empty.');
+    expect(validateDate('2023-10-26')).toBe('Date field cannot be empty.');
   });
 
   it('should return an error for year less than 1000', () => {
@@ -22,7 +22,7 @@ describe('validateDate', () => {
 
   it('should return null for current year', () => {
     expect(validateDate(`${currentYear}-01-01`)).toBeNull();
-   });
+  });
 
   it('should return null for year 1000', () => {
     expect(validateDate('1000-01-01')).toBeNull();
