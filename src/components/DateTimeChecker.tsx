@@ -9,7 +9,7 @@ interface TimeZoneOption {
 
 const timeZones: TimeZoneOption[] = [
   { label: 'UTC', value: 'UTC' },
-  { label: 'New York (EST)', value: 'America/New_York'} ,
+  { label: 'New York (EST)', value: 'America/New_York' },
   { label: 'London (GMT)', value: 'Europe/London' },
   { label: 'Tokyo (JST)', value: 'Asia/Tokyo' },
   { label: 'Sydney (AEST)', value: 'Australia/Sydney' }
@@ -103,7 +103,7 @@ const DateTimeChecker: React.FC = () => {
     const now = new Date();
     const diffInMinutes = differenceInMinutes(inputDateTime, now);
     const relativeTime = formatDistanceToNow(inputDateTime, { addSuffix: true });
-    
+
     setResult(`
       Selected date and time is ${relativeTime}
       (${Math.abs(diffInMinutes)} minutes ${diffInMinutes > 0 ? 'in the future' : 'in the past'})
@@ -166,7 +166,7 @@ const DateTimeChecker: React.FC = () => {
   return (
     <div className="datetime-checker">
       <h1>Date Time Checker</h1>
-      
+
       {showPopup && (
         <div className="popup-message">
           {popupMessage}
