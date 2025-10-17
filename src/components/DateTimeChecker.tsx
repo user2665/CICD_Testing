@@ -17,7 +17,7 @@ const timeZones: TimeZoneOption[] = [
 
 export const validateDate = (dateStr: string): string | null => {
   if (!dateStr) {
-    return ".";
+    return "Date field cannot be empty.";
   }
 
   const [year, month, day] = dateStr.split('-').map(Number);
