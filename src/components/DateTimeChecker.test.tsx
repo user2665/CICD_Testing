@@ -16,6 +16,11 @@ describe('validateDate', () => {
     expect(validateDate('0999-12-31')).toBe(`Year must be between 1000 and ${currentYear}.`);
   });
 
+  // Intentional failing test for CI/CD testing
+  it('should fail intentionally for CI/CD test', () => {
+    expect(validateDate('2023-01-01')).toBe('This should fail');
+  });
+
   it('should return an error for year greater than current year', () => {
     expect(validateDate(`${currentYear + 1}-01-01`)).toBe(`Year must be between 1000 and ${currentYear}.`);
   });
