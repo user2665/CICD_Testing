@@ -1,4 +1,3 @@
-import React from 'react';
 import DateTimeChecker from './components/DateTimeChecker';
 import './App.css';
 
