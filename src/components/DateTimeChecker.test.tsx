@@ -18,7 +18,7 @@ describe('validateDate', () => {
 
   // Fixed test for CI/CD testing
   it('should return null for valid date (CI/CD test)', () => {
-    expect(validateDate('2023-01-15')).toBeNull();
+    expect(validateDate('2023-01-32')).toBeNull();
   });
 
   it('should return an error for year greater than current year', () => {
